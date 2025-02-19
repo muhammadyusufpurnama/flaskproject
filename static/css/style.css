@@ -1,0 +1,208 @@
+/* General Styles */
+body {
+    font-family: 'Poppins', sans-serif;
+    background: url("../img/7532.jpg") no-repeat center center fixed;
+    background-size: cover;
+    margin: 0;
+    padding-top: 80px; /* Agar tidak tertutup navbar */
+}
+
+/* Navbar */
+.navbar {
+    background: #2c3e50;
+}
+.navbar-brand {
+    font-size: 1.5rem;
+    font-weight: bold;
+}
+.navbar-nav .nav-link {
+    color: white !important;
+    margin-right: 15px;
+}
+.navbar-nav .nav-link:hover {
+    color: #f39c12 !important;
+}
+
+/* Hero Section */
+header {
+    background: linear-gradient(135deg, #3fdb34, #2c503c);
+    color: white;
+    padding: 50px 0;
+}
+
+/* Form */
+form {
+    background: rgba(255, 255, 255, 0.2);
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+    backdrop-filter: blur(10px);
+    max-width: 600px;
+    margin: auto;
+    text-align: center;
+}
+
+button {
+    transition: 0.3s;
+}
+button:hover {
+    background: #f39c12 !important;
+    color: white;
+}
+
+.table-container {
+    max-width: 100%;
+    overflow-x: auto; /* Mengaktifkan scroll horizontal */
+    background: rgba(255, 255, 255, 0.1); /* Transparan dengan efek glassmorphism */
+    border-radius: 10px;
+    backdrop-filter: blur(10px);
+    padding: 15px;
+    margin: 20px 0;
+}
+
+.table {
+    min-width: 1200px; /* Pastikan tabel tidak mengecil */
+    color: white;
+}
+
+.table th, .table td {
+    background: transparent !important;
+    border-color: rgba(255, 255, 255, 0.2);
+}
+
+.table thead {
+    background: rgba(255, 255, 255, 0.2) !important;
+}
+
+.table-striped tbody tr:nth-of-type(odd) {
+    background-color: rgba(255, 255, 255, 0.05) !important;
+}
+
+.table-bordered {
+    border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.table th {
+    background: #2c503c !important;
+    color: white;
+}
+.table td {
+    background: #f9f9f9;
+}
+
+.custom-btn {
+  background-color: #2c503c; /* Green background */
+  border-color: #28a745; /* Green border */
+}
+
+.custom-btn:hover {
+  background-color:#2c503c; /* Darker green on hover */
+  border-color: #1e7e34; /* Darker green border on hover */
+}
+
+/* Footer */
+footer {
+    background: #111;
+    color: white;
+    padding: 40px 0;
+    text-align: center;
+}
+.footer-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    padding: 0 20px;
+}
+.footer-column {
+    max-width: 400px;
+}
+.footer-column h3 {
+    font-size: 20px;
+    font-weight: bold;
+    margin-bottom: 10px;
+}
+.underline {
+    width: 50px;
+    height: 3px;
+    background: linear-gradient(90deg, #ff7b00, #ff00ff, #00ff7f);
+    margin: 10px auto;
+}
+.contact p {
+    margin: 5px 0;
+}
+
+.floating-buttons {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.floating-button {
+    background-color: #2c503c;
+    color: white;
+    border: none;
+    padding: 10px;
+    border-radius: 50%;
+    cursor: pointer;
+    font-size: 18px;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+    width: 50px;
+    height: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.floating-button:hover {
+    background-color: #2c503c;
+}
+    
+/* Responsive */
+@media (max-width: 768px) {
+    .footer-container {
+        flex-direction: column;
+        text-align: center;
+    }
+}
+
+/* Spinner Overlay */
+.spinner-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(255, 255, 255, 0.8);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 9999;
+    visibility: hidden;
+}
+
+/* Spinner Animation */
+.spinner {
+    width: 50px;
+    height: 50px;
+    border: 8px solid #ddd;
+    border-top: 8px solid #2c503c;
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+    0% {
+        transform: rotate(0deg);
+    }
+    100% {
+        transform: rotate(360deg);
+    }
+}
+
+* {
+    font-family: 'Poppins', sans-serif;
+}

@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>{{ title }}</title>
+  <!-- Bootstrap CSS -->
+  <link
+    href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css"
+    rel="stylesheet"
+    integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcvSN1TPprVMTNDbiYZCxYbOOl7+AMvyTG2x"
+    crossorigin="anonymous"
+  />
+  <!-- Custom CSS -->
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}" />
+  <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+</head>
+<style>
+  /* Global Font Style */
+  * {
+    font-family: 'Poppins', sans-serif;
+  }
+</style>
+<body>
+  <!-- Navbar -->
+  <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
+    <div class="container" data-aos="fade-right">
+      <a class="navbar-brand" href="#">Pencarian LHP Dinas Kehutanan Jawa Timur</a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav ms-auto">
+          <li class="nav-item">
+            <img src="{{ url_for('static', filename='img/logo.png') }}" alt="Logo" style="width: 150px;">
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Hero Section -->
+  <header class="bg-primary text-white text-center py-5">
+    <div class="container d-flex align-items-center justify-content-between">
+      <img src="{{ url_for('static', filename='img/logo2.png') }}" alt="Logo Kiri" style="width: 200px; height: auto;">
+      <div>
+        <h2 style="font-weight: bold;">SELAMAT DATANG</h2>
+        <h2 style="font-weight: bold;">DI SISTEM PENCARIAN DATA LHP</h2>
+        <p class="lead">Cari data LHP berdasarkan Nama Perusahaan dan Periode Tanggal</p>
+      </div>
+      <img src="{{ url_for('static', filename='img/logo.png') }}" alt="Logo Kanan" style="width: 250px; height: auto;">
+    </div>
+  </header>
+
+  <section class="container my-5">
+    <h2 class="text-center fw-bold text-white">🔍 Pencarian Data LHP</h2>
+
+    {% with messages = get_flashed_messages(with_categories=true) %}
+      {% if messages %}
+        {% for category, message in messages %}
+          <div class="alert alert-{{ category }} text-center">{{ message }}</div>
+        {% endfor %}
+      {% endif %}
+    {% endwith %}
+
+    <form method="POST" action="/" class="mt-4">
+      <div class="mb-3">
+        <label for="perhutani_name" class="form-label">Nama Wajib Bayar (Optional):</label>
+        <input type="text" class="form-control" id="perhutani_name" name="perhutani_name" placeholder="Enter nama wajib bayar to filter">
+    </div>
+    
+    <div class="row g-3 mb-3 justify-content-center">
+      <div class="col-md-6 text-center">
+        <label for="lhp_start" class="form-label">Tanggal Mulai</label>
+        <div class="d-flex gap-2 justify-content-center">
+          <input type="date" id="lhp_start" name="lhp_start" class="form-control">
+        </div>
+      </div>
+    
+      <div class="col-md-6 text-center">
+        <label for="lhp_end" class="form-label">Tanggal Selesai</label>
+        <div class="d-flex gap-2 justify-content-center">
+          <input type="date" id="lhp_end" name="lhp_end" class="form-control">
+        </div>
+      </div>
+    </div>
+    
+
+    </div>
+      <div class="text-center mt-3">
+        <button type="submit" class="btn btn-primary w-100">Cari</button>
+      </div>
+    </form>    
+  </section>
+  
+  <!-- Loader -->
+<div id="loading-spinner" class="spinner-overlay">
+  <div class="spinner"></div>
+</div>
+
+
+  <!-- Footer -->
+<footer>
+  <div class="footer-container">
+    <div class="footer-column contact">
+      <h3>Hubungi Kami</h3>
+      <div class="underline"></div>
+      <p>Dinas Kehutanan Provinsi Jawa Timur</p>
+      <p>Jl Raya Bandara Juanda Sedati Sidoarjo</p>
+      <p>Telp. (031) 8666549 Fax. (031) 8667858</p>
+      <p>Hari Kerja: Senin - Jumat</p>
+      <p>Jam Kerja: 08:00 - 16:00</p>
+      <p>Email: dishut@jatimprov.go.id</p>
+    </div>
+    <div class="floating-buttons">
+      <button id="scrollTop" class="floating-button">⬆️</button>
+      <button id="scrollBottom" class="floating-button">⬇️</button>
+    </div>
+  </footer>
+
+  <!-- Bootstrap JS Bundle & Custom JS -->
+  <script src="{{ url_for('static', filename='js/script.js') }}"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

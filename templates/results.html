@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Hasil Pencarian PHL</title>
+  <!-- Bootstrap CSS -->
+  <link
+    href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css"
+    rel="stylesheet"
+    integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcvSN1TPprVMTNDbiYZCxYbOOl7+AMvyTG2x"
+    crossorigin="anonymous"
+  />
+  <!-- Custom CSS -->
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}" />
+  <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+</head>
+<style>
+  /* Global Font Style */
+  * {
+    font-family: 'Poppins', sans-serif;
+  }
+</style>
+<body>
+  <!-- Navbar -->
+  <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
+    <div class="container" data-aos="fade-right">
+      <a class="navbar-brand" href="#">Pencarian LHP Dinas Kehutanan Jawa Timur</a>
+      <!-- Toggle Button -->
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <!-- Navbar Items -->
+      <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav ms-auto">
+          <li class="nav-item">
+            <img src="{{ url_for('static', filename='img/logo.png') }}" alt="Logo" style="width: 150px;">
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+  <!-- End Navbar -->
+
+  <!-- Hero Section -->
+<!-- Hero Section -->
+<header class="bg-primary text-white text-center py-5">
+  <div class="container d-flex align-items-center justify-content-between">
+    <!-- Logo Kiri -->
+    <img src="{{ url_for('static', filename='img/logo2.png') }}" alt="Logo Kiri" style="width: 200px; height: auto;">
+    
+    <div>
+      <h2 style="font-weight: bold;">SELAMAT DATANG</h2>
+      <h2 style="font-weight: bold;">DI SISTEM PENCARIAN DATA LHP</h2>
+      <p class="lead">Cari data LHP berdasarkan Nama Perusahaan dan Periode Tanggal</p>
+    </div>
+    
+    <!-- Logo Kanan -->
+    <img src="{{ url_for('static', filename='img/logo.png') }}" alt="Logo Kanan" style="width: 250px; height: auto;">
+  </div>
+</header>
+  <div class="container mt-4">
+      {% with messages = get_flashed_messages(with_categories=true) %}
+          {% if messages %}
+              {% for category, message in messages %}
+                  <div class="alert alert-{{ category }}">{{ message }}</div>
+              {% endfor %}
+          {% endif %}
+      {% endwith %}
+
+      <h2 class="text-center fw-bold text-white">🔍 Scraping Result</h2>
+      <div class="table-container">
+      <div class="table-responsive">
+          <table class="table table-striped table-bordered">
+              <thead>
+                  <tr>
+                      <th>TRX ID</th>
+                      <th>NPWSHUT NO</th>
+                      <th>Nama Wajib Bayar</th>
+                      <th>LHP No</th>
+                      <th>Tanggal LHP</th>
+                      <th>Total Nominal Billing</th>
+                      <th>PNBP KLHK</th>
+                      <th>Kode Simponi</th>
+                      <th>NTPN</th>
+                      <th>Tanggal Pembayaran</th>
+                  </tr>
+              </thead>
+              <tbody>
+                  {% for row in data %}
+                  <tr>
+                      <td>{{ row['TRX ID'] }}</td>
+                      <td>{{ row['NPWSHUT NO'] }}</td>
+                      <td>{{ row['Nama Wajib Bayar'] }}</td>
+                      <td>{{ row['LHP No'] }}</td>
+                      <td>{{ row['Tanggal LHP'] }}</td>
+                      <td>{{ row['Total Nominal Billing'] }}</td>
+                      <td>{{ row['PNBP KLHK'] }}</td>
+                      <td>{{ row['Kode Simponi'] }}</td>
+                      <td>{{ row['NTPN'] }}</td>
+                      <td>{{ row['Tanggal Pembayaran'] }}</td>
+                  </tr>
+                  {% endfor %}
+              </tbody>
+          </table>
+      </div>
+    </div>
+
+      <div class="d-flex justify-content-between mt-3 mb-4">
+          <form action="{{ url_for('navigate') }}" method="post" class="d-inline">
+              <input type="hidden" name="direction" value="previous">
+              <button type="submit" class="btn btn-primary" {{ 'disabled' if not session.get('has_previous') }}>
+                  Previous Page
+              </button>
+          </form>
+          
+          <div class="text-center">
+              <span class="badge bg-secondary">Page {{ session.get('current_page', 1) }}</span>
+          </div>
+
+          <form action="{{ url_for('navigate') }}" method="post" class="d-inline">
+              <input type="hidden" name="direction" value="next">
+              <button type="submit" class="btn btn-primary" {{ 'disabled' if not session.get('has_next') }}>
+                  Next Page
+              </button>
+          </form>
+      </div>
+
+      <div class="text-center mb-3">
+        <a href="{{ url_for('download_excel') }}" class="btn btn-success">
+            📥 Download Excel
+        </a>
+    </div>
+    
+      <div class="text-center mt-3">
+          <a href="{{ url_for('index') }}" class="btn btn-secondary">New Search</a>
+      </div>
+  </div>
+
+<!-- Footer -->
+<footer>
+  <div class="footer-container">
+    <div class="footer-column contact">
+      <h3>Hubungi Kami</h3>
+      <div class="underline"></div>
+      <p>Dinas Kehutanan Provinsi Jawa Timur</p>
+      <p>Jl Raya Bandara Juanda Sedati Sidoarjo</p>
+      <p>Telp. (031) 8666549 Fax. (031) 8667858</p>
+      <p>Hari Kerja: Senin - Jumat</p>
+      <p>Jam Kerja: 08:00 - 16:00</p>
+      <p>Email: dishut@jatimprov.go.id</p>
+    </div>
+  </div>
+  <div class="floating-buttons">
+    <button id="scrollTop" class="floating-button">⬆️</button>
+    <button id="scrollBottom" class="floating-button">⬇️</button>
+  </div>
+</footer>
+  <!-- Bootstrap JS Bundle & Custom JS -->
+  <script src="{{ url_for('static', filename='js/script.js') }}"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
