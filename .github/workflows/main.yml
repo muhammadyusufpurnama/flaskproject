@@ -49,7 +49,7 @@ jobs:
         run: |
           echo "GITHUB_REPOSITORY: ${GITHUB_REPOSITORY}, USER: ${GITHUB_REPOSITORY%/*}"
           flutter config --no-analytics
-          flet build web --route-url-strategy hash # Remove --base-url
+          flet build web --module-name app --route-url-strategy hash  # Perubahan di sini
 
       - name: Upload Artifact
         uses: actions/upload-pages-artifact@v3
